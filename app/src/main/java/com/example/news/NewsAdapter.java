@@ -1,6 +1,7 @@
 package com.example.news;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,25 +11,42 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.news.Models.NewsHeadline;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     Context context;
+    List<NewsHeadline> headlines;
+
+    public NewsAdapter(Context context, List<NewsHeadline> headlines) {
+        this.context = context;
+        this.headlines = headlines;
+    }
 
     @NonNull
     @Override
     public NewsAdapter.NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new NewsViewHolder(LayoutInflater.from(context).inflate(R.layout.headline_list_item, parent));
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.NewsViewHolder holder, int position) {
-
+      holder.title.setText(headlines.get(position).getTitle());
+      holder.source.setText(headlines.get(position).getSource().getName());
+      if (headlines.get(position).getUrlToImage() != null){
+          Picasso.get().load(headlines.get(position).getUrlToImage()).into(holder.headlineImage);
+      }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return headlines.size();
     }
+
     public class NewsViewHolder extends RecyclerView.ViewHolder{
         TextView title, source;
         ImageView headlineImage;
