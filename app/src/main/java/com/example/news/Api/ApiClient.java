@@ -5,10 +5,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    String baseUrl = "https://newsapi.org/v2/";
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
+    private static String baseUrl = "https://newsapi.org/v2/";
+    private static Retrofit retrofit;
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
 }

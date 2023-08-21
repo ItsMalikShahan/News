@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.news.Models.NewsApiResponse;
 import com.example.news.Models.NewsHeadline;
+import com.example.news.MyModels.NewsHeadlines;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private final OnFetchDataListener<NewsApiResponse> listener = new OnFetchDataListener<NewsApiResponse>() {
         @Override
-        public void onFetchData(List<NewsHeadline> list, String message) {
+        public void onFetchData(List<NewsHeadlines> list, String message) {
 
             showNews(list);
         }
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void showNews(List<NewsHeadline> list) {
+    private void showNews(List<NewsHeadlines> list) {
         Log.e("Check list", "Checking list for data "+list.size() );
         recyclerView = findViewById(R.id.rl_news);
         recyclerView.setHasFixedSize(true);

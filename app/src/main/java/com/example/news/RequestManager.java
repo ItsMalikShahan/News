@@ -4,7 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.news.Api.Api;
+import com.example.news.Api.ApiClient;
 import com.example.news.Models.NewsApiResponse;
+import com.example.news.MyModels.NewsXApiResponse;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -17,7 +20,7 @@ import retrofit2.http.Query;
 
 public class RequestManager {
     Context context;
-    Retrofit retrofit;
+    ApiClient apiClient;
 
 
 //    Retrofit retrofit = new Retrofit.Builder()
@@ -27,15 +30,14 @@ public class RequestManager {
 
 
     public void getNewsHeadline(OnFetchDataListener listener, String category, String query ){
-      if (retrofit != null) {
-          CallApi callApi = retrofit.create(CallApi.class);
-          Call<NewsApiResponse> call = callApi.callHeadline("us", category, query, context.getString(R.string.api_key));
+        Api retrofitApi = ApiClient.getClient().create(Api.class);
+          Call<NewsXApiResponse> call = retrofitApi.newsHeadline("us", category, query, context.getString(R.string.api_key));
           Log.e("Call", "onFetch: ");
 
           try {
-              call.enqueue(new Callback<NewsApiResponse>() {
+              call.enqueue(new Callback<NewsXApiResponse>() {
                   @Override
-                  public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
+                  public void onResponse(Call<NewsXApiResponse> call, Response<NewsXApiResponse> response) {
                       if (!response.isSuccessful()) {
                           Log.e("Api Check", "onResponse: ");
                           Toast.makeText(context, "Error!!", Toast.LENGTH_SHORT).show();
@@ -44,7 +46,7 @@ public class RequestManager {
                   }
 
                   @Override
-                  public void onFailure(Call<NewsApiResponse> call, Throwable t) {
+                  public void onFailure(Call<NewsXApiResponse> call, Throwable t) {
                       listener.onError("Request failed");
                       Log.e("Error Message", "onFailure: " + t.getMessage());
                   }
@@ -53,16 +55,16 @@ public class RequestManager {
               e.printStackTrace();
           }
       }
-    }
+
     public RequestManager(Context context) {
         this.context = context;
     }
-    public interface CallApi{
-        @GET("top-headlines")
-        Call<NewsApiResponse> callHeadline(@Query("country") String country,
-                                           @Query("category") String category,
-                                           @Query("q")  String query,
-                                           @Query("apiKey") String api_key
-            );
-    }
+//    public interface CallApi{
+//        @GET("top-headlines")
+//        Call<NewsApiResponse> callHeadline(@Query("country") String country,
+//                                           @Query("category") String category,
+//                                           @Query("q")  String query,
+//                                           @Query("apiKey") String api_key
+//            );
+//    }
 }

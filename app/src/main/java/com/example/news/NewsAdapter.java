@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.news.Models.NewsHeadline;
+import com.example.news.MyModels.NewsHeadlines;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,9 +20,9 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     Context context;
-    List<NewsHeadline> headlines;
+    List<NewsHeadlines> headlines;
 
-    public NewsAdapter(Context context, List<NewsHeadline> headlines) {
+    public NewsAdapter(Context context, List<NewsHeadlines> headlines) {
         this.context = context;
         this.headlines = headlines;
     }
