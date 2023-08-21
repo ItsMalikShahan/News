@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp"
+    android:layout_margin="10dp"
     android:id="@+id/cardview"
     app:cardCornerRadius="10dp">
 
@@ -11,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="5dp"
         android:weightSum="3">
 
         <LinearLayout
@@ -43,7 +45,7 @@
         <ImageView
             android:id="@+id/iv_newsImage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/not_available" />
