@@ -31,7 +31,7 @@ public class RequestManager {
 
     public void getNewsHeadline(OnFetchDataListener listener, String category, String query ){
         Api retrofitApi = ApiClient.getClient().create(Api.class);
-          Call<NewsXApiResponse> call = retrofitApi.newsHeadline("us", category, query, context.getString(R.string.api_key));
+          Call<NewsXApiResponse> call = retrofitApi.newsHeadline("in", category, query, context.getString(R.string.api_key));
           Log.e("Call", "onFetch: ");
 
           try {

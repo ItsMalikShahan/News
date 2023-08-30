@@ -1,8 +1,9 @@
 package com.example.news.MyModels;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class NewsXApiResponse {
+public class NewsXApiResponse implements Serializable {
     List<NewsHeadlines> articles;
     String status;
     String totalResults;
